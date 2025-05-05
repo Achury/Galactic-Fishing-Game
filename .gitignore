@@ -1,0 +1,54 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build directories
+dist
+dev-dist
+dist-ssr
+*.local
+
+# Dependency directories
+node_modules/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Build artifacts
+**/*.js
+**/*.js.map
+!src/**/*.js # Keep your custom JS files if any
+!**/webpack.config.js
+!**/vite.config.js
+
+# TypeScript generated files
+**/*.d.ts
+**/*.tsbuildinfo
+
+# Cache
+.cache/
+.temp/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Debug files
+*.debug
+
+# Vite specific
+.vite/
