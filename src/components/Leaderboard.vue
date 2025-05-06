@@ -1,8 +1,14 @@
 <template>
-  <div class="card h-full">
-    <div class="flex justify-between items-center mb-6">
-      <h2 class="text-xl font-bold text-accent">Leaderboard</h2>
-      <div class="text-sm text-gray-400">Winner: Highest Level → Most Gold</div>
+  <div class="card w-full">
+    <div
+      class="flex flex-col xs:flex-row xs:justify-between xs:items-center mb-2 xs:mb-3 sm:mb-4"
+    >
+      <h2 class="text-base xs:text-lg sm:text-xl font-bold text-accent">
+        Leaderboard
+      </h2>
+      <div class="text-xxs xs:text-xs sm:text-sm text-gray-400 mt-1 xs:mt-0">
+        Winner: Highest Level → Most Gold
+      </div>
     </div>
 
     <LoadingSpinner :show="leaderboard.isLoading" />
@@ -12,26 +18,28 @@
     />
 
     <div v-if="!leaderboard.isLoading" class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-700">
+      <table
+        class="min-w-full divide-y divide-gray-700 text-xs xs:text-sm sm:text-base"
+      >
         <thead class="bg-gray-700">
           <tr>
             <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+              class="px-1 xs:px-2 sm:px-3 py-1 xs:py-2 font-medium text-gray-300"
             >
               Rank
             </th>
             <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+              class="px-1 xs:px-2 sm:px-3 py-1 xs:py-2 font-medium text-gray-300"
             >
               Player
             </th>
             <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+              class="px-1 xs:px-2 sm:px-3 py-1 xs:py-2 font-medium text-gray-300"
             >
               Level
             </th>
             <th
-              class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+              class="px-1 xs:px-2 sm:px-3 py-1 xs:py-2 font-medium text-gray-300"
             >
               Gold
             </th>
@@ -51,15 +59,35 @@
               'hover:bg-gray-700': player.rank > 3,
             }"
           >
-            <td class="px-4 py-3 whitespace-nowrap font-medium">
-              <span v-if="player.rank === 1" class="text-2xl">🥇</span>
-              <span v-else-if="player.rank === 2" class="text-2xl">🥈</span>
-              <span v-else-if="player.rank === 3" class="text-2xl">🥉</span>
+            <td class="px-1 xs:px-2 sm:px-3 py-1 xs:py-2 whitespace-nowrap">
+              <span
+                v-if="player.rank === 1"
+                class="text-lg xs:text-xl sm:text-2xl"
+                >🥇</span
+              >
+              <span
+                v-else-if="player.rank === 2"
+                class="text-lg xs:text-xl sm:text-2xl"
+                >🥈</span
+              >
+              <span
+                v-else-if="player.rank === 3"
+                class="text-lg xs:text-xl sm:text-2xl"
+                >🥉</span
+              >
               <span v-else class="text-gray-400">{{ player.rank }}</span>
             </td>
-            <td class="px-4 py-3">{{ player.username }}</td>
-            <td class="px-4 py-3 text-blue-400">{{ player.level }}</td>
-            <td class="px-4 py-3 text-yellow-400">
+            <td
+              class="px-1 xs:px-2 sm:px-3 py-1 xs:py-2 truncate max-w-[75px] xs:max-w-none"
+            >
+              {{ player.username }}
+            </td>
+            <td class="px-1 xs:px-2 sm:px-3 py-1 xs:py-2 text-blue-400">
+              {{ player.level }}
+            </td>
+            <td
+              class="px-1 xs:px-2 sm:px-3 py-1 xs:py-2 text-yellow-400 whitespace-nowrap"
+            >
               {{ formatGold(player.gold) }}
             </td>
           </tr>
