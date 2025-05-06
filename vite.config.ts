@@ -8,16 +8,30 @@ export default defineConfig({
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['**/*'], // Cache all assets
+      includeAssets: ['**/*'],
       manifest: {
-        /* your manifest config */
+        name: 'Game App',
+        short_name: 'Game',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: '/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest}'],
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/api-game\.bloque\.app\/.*/i,
-            handler: 'StaleWhileRevalidate',
+            urlPattern: /^https:\/\/api-game\.bloque\.app\/game\/.*/i,
+            handler: 'NetworkFirst', // Changed to NetworkFirst for better offline support
             options: {
               cacheName: 'api-cache',
               expiration: {
@@ -27,20 +41,16 @@ export default defineConfig({
               cacheableResponse: {
                 statuses: [0, 200],
               },
+              networkTimeoutSeconds: 3, // Fallback to cache if network is slow
             },
           },
         ],
         navigateFallback: 'index.html',
-        navigateFallbackDenylist: [
-          /^\/api/, // Don't fallback for API routes
-          /\.(?:png|jpe?g|svg|json)$/, // Don't fallback for static assets
-        ],
-        offlineGoogleAnalytics: false,
         clientsClaim: true,
         skipWaiting: true,
       },
       devOptions: {
-        enabled: false, // Disable SW in dev to avoid conflicts
+        enabled: false,
       },
     }),
   ],
